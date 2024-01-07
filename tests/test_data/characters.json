@@ -1,0 +1,20 @@
+{
+    "characters": [
+        {
+            "name": "Weronika",
+            "qualities": ["smart", "funny", "beautiful"],
+            "age": 22,
+            "interests": ["music", "books", "dogs"],
+            "friends": ["Anna", "Magdalena", "Adrianna"],
+            "backstory": "Weronika lives in Warsaw. She is a student of English Philology. She loves to read books and listen to music. She has a dog named Burek. She is a very smart and funny person. She has a lot of friends."
+        },
+        {
+            "name": "Nataniel",
+            "qualities": ["clever", "tech-savy", "friendly"],
+            "age": 25,
+            "interests": ["computers", "games", "movies"],
+            "friends": ["Kamil", "Piotr", "Michał"],
+            "backstory": "Nataniel lives in Warsaw. He is a student of Computer Science. He loves to play games and watch movies. He is a very clever and friendly person. He has a lot of friends."
+        }
+    ]
+}

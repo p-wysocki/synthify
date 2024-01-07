@@ -1,0 +1,22 @@
+[project]
+name = "synthify"
+version = "0.0.1"
+description = "Placeholder"
+authors = [
+    {name = "Przemysław Wysocki", email = "wysocki.przemyslaw1@gmail.com"},
+]
+dependencies = [
+    "pytest>=7.4.4",
+    "jsons>=1.6.3",
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+package-type = "library"
