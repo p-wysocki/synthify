@@ -65,3 +65,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# OpenAI API key
+openai_key.txt
