@@ -1,5 +1,4 @@
 import synthify
-import pytest
 import json
 
 
@@ -11,7 +10,6 @@ def test_basic():
         data = myfile.read()
     characters = json.loads(data)
 
-    print(dir(synthify))
     dreamer = synthify.Dreamer(world_context, characters)
     print(dreamer)
 

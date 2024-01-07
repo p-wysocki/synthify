@@ -1,7 +1,6 @@
 
 from typing import Any, List, Dict, Tuple, Union, Optional
-
-from generation.character import Character
+from synthify.generation.character import Character
 
 
 class Dreamer():
