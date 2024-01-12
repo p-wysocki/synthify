@@ -1,5 +1,15 @@
+from synthify.generation.character import Character, CharacterFactory
+
 import synthify
 import json
+
+
+def test_character_factory_from_json():
+    character_factory = CharacterFactory()
+    characters = character_factory.from_json("test_data/characters.json")
+    assert isinstance(characters, list)
+    assert isinstance(characters[0], Character)
+    assert len(characters) == 2
 
 
 def test_basic():
@@ -11,6 +21,3 @@ def test_basic():
     characters = json.loads(data)
 
     dreamer = synthify.Dreamer(world_context, characters)
-    print(dreamer)
-
-# TODO: generate characters
