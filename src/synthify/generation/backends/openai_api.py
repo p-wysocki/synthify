@@ -1,6 +1,8 @@
 import json
 
-from synthify.config import OPENAI_API_KEY
+from synthify.character import Character
+from synthify.world import World
+from synthify.config import OPENAI_API_KEY, OPENAI_CHAT_TEMPERATURE, OPENAI_MODEL
 from openai import OpenAI
 from typing import List, Dict
 
@@ -25,32 +27,37 @@ def _get_system_prompt(world_context: str) -> List[Dict[str, str]]:
     ]
 
 
-def _get_openai_client() -> OpenAI:
-    return OpenAI(api_key=OPENAI_API_KEY)
-
-
 def _request_chat_completion(openai_client: OpenAI, prompt: List[Dict[str, str]], debug: bool=False) -> str:
     if debug:  # do not waste API calls in debug mode
         completion = {"choices": [{"text": "This is a mock response."}]}
     else:
         completion = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=OPENAI_MODEL,
         messages=prompt,
-        temperature=1.7,
+        temperature=OPENAI_CHAT_TEMPERATURE,
         )
 
     return completion.choices[0].message.content
 
 
-def generate_characters(world_context: str, character_attributes: List[str], characters_to_generate: int = 1) -> List[Dict[str, str]]:
+def generate_characters(world: World, character_attributes: List[str], characters_to_generate: int = 1) -> List[Dict[str, str]]:
     # TODO: Make model remember last few characters to avoid duplication?
     # TODO: How to make sure the characters are interesting?
-    openai_client = _get_openai_client()
-    if characters_to_generate < 1:
-        raise ValueError("Must generate at least one character.")
-    prompt = _get_system_prompt(world_context) + _get_role_prompt(character_attributes)
+    openai_client = OpenAI(api_key=OPENAI_API_KEY)
+    if len(world.characters) < 1:
+        raise ValueError(f"Must generate at least one character. World {world.name} has {len(world.characters)} characters.")
+    prompt = _get_system_prompt(world.world_context) + _get_role_prompt(character_attributes)
     generated_characters = []
     for _ in range(characters_to_generate):
-        generated_characters.append(json.loads(_request_chat_completion(openai_client, prompt)))
+        character = _request_chat_completion(openai_client, prompt)
+        try:
+            generated_characters.append(Character(json.loads(character)))
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid LLM response: {character}.\nThe prompt was: {prompt}.\nError: {e}")
 
     return generated_characters
+
+
+def generate_dialogue():
+    #TODO: Implement this
+    pass

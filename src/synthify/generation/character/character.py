@@ -32,5 +32,9 @@ class CharacterFactory():
 
         return [Character(single_character_description) for single_character_description in character_description["characters"]]
 
-    def generate_characters(self, character_attributes: List[str]) -> List['Character']:
-        pass
+    def generate_characters(self, character_attributes: List[str], backend: str) -> List['Character']:
+        #TODO: Implement this
+        if backend == "openai":
+            pass
+        else:
+            raise ValueError(f"Invalid backend: {backend}.")

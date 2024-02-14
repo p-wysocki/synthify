@@ -1,14 +1,9 @@
-import synthify
-
-from pathlib import Path
+import os
 
 # OpenAI --------------------------------------------------------------------------------------------------------------------
-OPENAI_API_KEY_PATH = Path(synthify.__file__) / Path("..") / Path("openai_key.txt")
-
-with open(OPENAI_API_KEY_PATH, "r") as f:
-    OPENAI_API_KEY = f.read()
-
+OPENAI_CHAT_TEMPERATURE = 1.7
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", None)
+OPENAI_MODEL = "gpt-3.5-turbo"
 if not OPENAI_API_KEY:
-    raise RuntimeError("Please create a file called openai_api_token.txt in the root directory and paste your OpenAI API key in it.")
-
+    raise RuntimeError("OpenAI API key not found. Please set the OPENAI_API_KEY environment variable.")
 # ----------------------------------------------------------------------------------------------------------------------------

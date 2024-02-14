@@ -10,4 +10,5 @@ def test_openai_api_access():
 def test_character_generation():
     world_context_small = "A fantasy world with dragons and magic."
     characters = openai_api.generate_characters(world_context_small, ["name", "age", "occupation"], 3)
-    print(characters)
+    #TODO: How to properly validate an LLM response?
+    assert len(characters) == 3
